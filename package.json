@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/server.bundle.js",
-    "build:client": "webpack --config webpack.config.client.js",
-    "build:server": "webpack --config webpack.config.server.js"
+    "build:client": "CI=false && webpack --config webpack.config.client.js",
+    "build:server": "CI=false && webpack --config webpack.config.server.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
