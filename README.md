@@ -26,11 +26,11 @@ Project show users and their albums and posts
 no config - test version
 
 # Build
-npm run build:client
-npm run build:server
+* npm run build:client
+* npm run build:server
 
 
 
 # to start local development
-before start need to build 2 parts client and server
-npm start
+* before start need to build 2 parts client and server
+* then npm start
