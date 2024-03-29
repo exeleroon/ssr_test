@@ -1,0 +1,86 @@
+@import "~bootstrap/scss/bootstrap";
+
+body {
+  background-color: #b6b6b6;
+}
+
+.main-container {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  width: 100%;
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 0.375rem;
+  max-width: 700px;
+  overflow-y: auto;
+}
+
+.list-container {
+  max-height: 800px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 0.375rem;
+  overflow: auto;
+}
+
+.post-list {
+  h3 {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+}
+
+.user-list {
+  form {
+    margin-right: 1px;
+  }
+
+  &__btns {
+    gap: 10px;
+    visibility: hidden;
+    a {
+        text-decoration: none;
+    }
+  }
+
+  .form-control {
+    width: 224px;
+    border-radius: 0;
+  }
+
+  .form-control.is-invalid, .was-validated .form-control:invalid {
+    padding-right: 0;
+    border-radius: 0;
+  }
+
+  .input-group-text {
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .input-group .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    font-weight: 500;
+    font-size: 14px;
+    border-color: #ced4da;
+  }
+
+  .list-group-item {
+    min-height: 48px;
+
+    &:hover {
+      .user-list__btns {
+        visibility: inherit;
+      }
+    }
+  }
+
+  .page-item {
+    cursor: pointer;
+  }
+}
