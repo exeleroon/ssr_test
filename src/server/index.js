@@ -115,7 +115,7 @@ app.get('/posts/:userId');
 app.get('/albums/:userId');
 
 
-app.listen(3000, () => {
+app.listen('https://ssr-test-amber-mu.vercel.app/', () => {
     console.log('Server is listening on PORT 3000');
 });
 
