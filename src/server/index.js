@@ -115,7 +115,7 @@ app.get('/posts/:userId');
 app.get('/albums/:userId');
 
 
-app.listen('https://ssr-tetso.netlify.app/', () => {
+app.listen('https://master--ssr-tetso.netlify.app/', () => {
     console.log('Server is listening on PORT 3000');
 });
 
