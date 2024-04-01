@@ -1,6 +1,4 @@
 const path = require('path');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'production',
@@ -28,20 +26,6 @@ module.exports = {
             }
         ]
     },
-    plugins: [
-        // new MiniCssExtractPlugin({
-        //     filename: 'styles.css',
-        // }),
-        new HtmlWebpackPlugin({
-            template: 'public/index.html', // Path to your HTML template
-            filename: 'index.html', // Output filename in dist directory
-            inject: true // Inject script tags automatically
-        })
-        // new webpack.ProvidePlugin({
-        //     $: 'jquery',
-        //     jQuery: 'jquery'
-        // }),
-    ],
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx']
     },
