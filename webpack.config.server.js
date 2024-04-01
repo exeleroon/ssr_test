@@ -41,11 +41,11 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'styles.css',
         }),
-        new HtmlWebpackPlugin({
-            template: 'public/index.html', // Path to your HTML template
-            filename: 'index.html', // Output filename in dist directory
-            inject: true // Inject script tags automatically
-        })
+        // new HtmlWebpackPlugin({
+        //     template: 'public/index.html', // Path to your HTML template
+        //     filename: 'index.html', // Output filename in dist directory
+        //     inject: true // Inject script tags automatically
+        // })
         // new webpack.ProvidePlugin({
         //     $: 'jquery',
         //     jQuery: 'jquery'

@@ -10,7 +10,6 @@ import axios from "axios";
 import '../styles/main.scss';
 import * as fs from "fs";
 import * as path from "path";
-import AppD from '../../dist/server.bundle';
 
 const routesArr = [
     {
@@ -58,11 +57,6 @@ const readCssFiles = () => {
 };
 
 app.get('*', async (req, res) => {
-    const appString2 = renderToString(React.createElement(AppD));
-    const indexPath = path.resolve(__dirname, '../dist/index.html');
-    const indexHtml = fs.readFileSync(indexPath, 'utf8');
-    const updatedHtml = indexHtml.replace('<div id="root"></div>', `<div id="root">${appString2}kolo</div>`);
-
     try {
         const context = {};
         const splitRoute = req.originalUrl.split('/');
@@ -108,7 +102,7 @@ app.get('*', async (req, res) => {
             </Provider>
         );
 
-        const html = template(updatedHtml, getTitleDesc, customCss);
+        const html = template(appString, getTitleDesc, customCss);
         res.send(html);
 
     } catch (error) {
@@ -121,7 +115,6 @@ app.get('/posts/:userId');
 app.get('/albums/:userId');
 
 
-// app.listen('https://ssr-tetso.netlify.app/', () => {
-app.listen('http://localhost:3000/', () => {
+app.listen('https://ssr-tetso.netlify.app/', () => {
     console.log('Server is listening on PORT 3000');
 });
