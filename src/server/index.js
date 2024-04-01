@@ -61,7 +61,7 @@ app.get('*', async (req, res) => {
     const appString2 = renderToString(React.createElement(AppD));
     const indexPath = path.resolve(__dirname, '../dist/index.html');
     const indexHtml = fs.readFileSync(indexPath, 'utf8');
-    const updatedHtml = indexHtml.replace('<div id="root"></div>', `<div id="root">${appString2}</div>`);
+    const updatedHtml = indexHtml.replace('<div id="root"></div>', `<div id="root">${appString2}kolo</div>`);
 
     try {
         const context = {};
