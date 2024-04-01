@@ -5,10 +5,10 @@ module.exports = {
     entry: './src/client/index.tsx',
     output: {
         // publicPath: '/'
-        path: path.resolve(__dirname, 'public'),
+        path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
     },
-    // target: 'web',
+    target: 'node',
     module: {
         rules: [
             {
