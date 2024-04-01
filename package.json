@@ -7,7 +7,7 @@
     "start": "node dist/server.bundle.js",
     "build:client": "webpack --config webpack.config.client.js",
     "build:server": "webpack --config webpack.config.server.js",
-    "build": "npm run build:client && npm run build:server"
+    "build": "CI=false && npm run build:client && npm run build:server"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
