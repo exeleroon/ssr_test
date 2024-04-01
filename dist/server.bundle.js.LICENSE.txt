@@ -253,6 +253,8 @@ object-assign
  * MIT Licensed
  */
 
+/*! For license information please see server.bundle.js.LICENSE.txt */
+
 /*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
 /**
