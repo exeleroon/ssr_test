@@ -10,6 +10,7 @@ import axios from "axios";
 import '../styles/main.scss';
 import * as fs from "fs";
 import * as path from "path";
+import AppD from '../../dist/server.bundle';
 
 const routesArr = [
     {
@@ -36,7 +37,7 @@ const routesArr = [
 
 const store = setupStore();
 const app = express();
-app.use(express.static('dist/public'));
+app.use(express.static('dist'));
 
 const cssFilePaths = [
     path.resolve(__dirname, 'styles.css'),
@@ -57,6 +58,11 @@ const readCssFiles = () => {
 };
 
 app.get('*', async (req, res) => {
+    const appString2 = renderToString(React.createElement(AppD));
+    const indexPath = path.resolve(__dirname, '../dist/index.html');
+    const indexHtml = fs.readFileSync(indexPath, 'utf8');
+    const updatedHtml = indexHtml.replace('<div id="root"></div>', `<div id="root">${appString2}</div>`);
+
     try {
         const context = {};
         const splitRoute = req.originalUrl.split('/');
@@ -102,7 +108,7 @@ app.get('*', async (req, res) => {
             </Provider>
         );
 
-        const html = template(appString, getTitleDesc, customCss);
+        const html = template(updatedHtml, getTitleDesc, customCss);
         res.send(html);
 
     } catch (error) {
@@ -115,36 +121,7 @@ app.get('/posts/:userId');
 app.get('/albums/:userId');
 
 
-app.listen('https://master--ssr-tetso.netlify.app/', () => {
+// app.listen('https://ssr-tetso.netlify.app/', () => {
+app.listen('http://localhost:3000/', () => {
     console.log('Server is listening on PORT 3000');
 });
-
-// fs.readFile(cssFilePath, 'utf8', (err, cssC) => {
-//     app.get('*', async (req, res) => {
-//         try {
-//             const context = {};
-//             const getTitleDesc = routesArr.find(route => req.path === route.path);
-//
-//             const response = await axios.get('https://jsonplaceholder.typicode.com/users');
-//             const users = response.data;
-//
-//
-//             const appString = renderToString(
-//                 <Provider store={store}>
-//                     <StaticRouter location={req.url} context={context}>
-//                         <App users={users}/>
-//                     </StaticRouter>
-//                 </Provider>
-//             );
-//
-//             const html = template(appString, getTitleDesc, cssC);
-//             res.send(html);
-//
-//         } catch (error) {
-//             console.error('Error fetching users:', error);
-//             res.status(500).send('Internal Server Error');
-//         }
-//     });
-//
-//
-// })
