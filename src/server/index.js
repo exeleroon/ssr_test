@@ -68,41 +68,41 @@ app.get('*', async (req, res) => {
             userId = getUserId;
         }
 
-        const [customCss] = await readCssFiles();
-        const response = await axios.get('https://jsonplaceholder.typicode.com/users');
-        const users = response.data;
-
-        const responsePosts = await axios.get('https://jsonplaceholder.typicode.com/posts?userId=' + userId);
-        const posts = responsePosts.data;
-
-        const responseAlbums = await axios.get('https://jsonplaceholder.typicode.com/albums?userId=' + userId);
-        const albums = responseAlbums.data;
-
-        if (splitRoute[1] !== '?' && getTitleDesc && userId) {
-            const getUser = users.find(user => parseInt(user.id) === parseInt(userId));
-            getTitleDesc.description = getTitleDesc.description + getUser?.name;
-            getTitleDesc.title = getUser?.username + ' ' + getTitleDesc.title;
-        }
-
-        users.sort(function (a, b) {
-            if (a.name < b.name) {
-                return -1;
-            }
-            if (a.name > b.name) {
-                return 1;
-            }
-            return 0;
-        })
+        // const [customCss] = await readCssFiles();
+        // const response = await axios.get('https://jsonplaceholder.typicode.com/users');
+        // const users = response.data;
+        //
+        // const responsePosts = await axios.get('https://jsonplaceholder.typicode.com/posts?userId=' + userId);
+        // const posts = responsePosts.data;
+        //
+        // const responseAlbums = await axios.get('https://jsonplaceholder.typicode.com/albums?userId=' + userId);
+        // const albums = responseAlbums.data;
+        //
+        // if (splitRoute[1] !== '?' && getTitleDesc && userId) {
+        //     const getUser = users.find(user => parseInt(user.id) === parseInt(userId));
+        //     getTitleDesc.description = getTitleDesc.description + getUser?.name;
+        //     getTitleDesc.title = getUser?.username + ' ' + getTitleDesc.title;
+        // }
+        //
+        // users.sort(function (a, b) {
+        //     if (a.name < b.name) {
+        //         return -1;
+        //     }
+        //     if (a.name > b.name) {
+        //         return 1;
+        //     }
+        //     return 0;
+        // })
 
         const appString = renderToString(
             <Provider store={store}>
                 <StaticRouter location={req.url} context={context}>
-                    <App users={users} albums={albums} posts={posts}/>
+                    <App users={[]} albums={[]} posts={[]}/>
                 </StaticRouter>
             </Provider>
         );
 
-        const html = template(appString, getTitleDesc, customCss);
+        const html = template(appString, getTitleDesc, null);
         res.send(html);
 
     } catch (error) {
