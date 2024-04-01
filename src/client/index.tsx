@@ -11,7 +11,7 @@ const store = setupStore();
 ReactDOM.hydrate(
     <Provider store={store}>
         <BrowserRouter>
-            <App users={[]} posts={[]} albums={[]}/>
+            {/*<App users={[]} posts={[]} albums={[]}/>*/}
         </BrowserRouter>
     </Provider>,
     document.getElementById('root')
