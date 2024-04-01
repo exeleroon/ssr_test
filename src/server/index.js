@@ -1,15 +1,29 @@
-import express from 'express';
-import React from 'react';
-import {renderToString} from 'react-dom/server';
-import {Provider} from 'react-redux';
-import {StaticRouter} from 'react-router-dom';
-import App from '../App';
-import {setupStore} from "../store/store";
-import template from "./template";
-import axios from "axios";
-import '../styles/main.scss';
-import * as fs from "fs";
-import * as path from "path";
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const express = require('express');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const React = require('react');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { renderToString } = require('react-dom/server');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { Provider } = require('react-redux');
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { StaticRouter } = require('react-router-dom');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const App = require('../App').default; // Add `.default` for default export
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { setupStore } = require("../store/store");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const template = require("./template");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const axios = require("axios");
+require('../styles/main.scss'); // Use require for CSS imports
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const fs = require('fs');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const path = require('path');
 
 const routesArr = [
     {
@@ -68,41 +82,41 @@ app.get('*', async (req, res) => {
             userId = getUserId;
         }
 
-        // const [customCss] = await readCssFiles();
-        // const response = await axios.get('https://jsonplaceholder.typicode.com/users');
-        // const users = response.data;
-        //
-        // const responsePosts = await axios.get('https://jsonplaceholder.typicode.com/posts?userId=' + userId);
-        // const posts = responsePosts.data;
-        //
-        // const responseAlbums = await axios.get('https://jsonplaceholder.typicode.com/albums?userId=' + userId);
-        // const albums = responseAlbums.data;
-        //
-        // if (splitRoute[1] !== '?' && getTitleDesc && userId) {
-        //     const getUser = users.find(user => parseInt(user.id) === parseInt(userId));
-        //     getTitleDesc.description = getTitleDesc.description + getUser?.name;
-        //     getTitleDesc.title = getUser?.username + ' ' + getTitleDesc.title;
-        // }
-        //
-        // users.sort(function (a, b) {
-        //     if (a.name < b.name) {
-        //         return -1;
-        //     }
-        //     if (a.name > b.name) {
-        //         return 1;
-        //     }
-        //     return 0;
-        // })
+        const [customCss] = await readCssFiles();
+        const response = await axios.get('https://jsonplaceholder.typicode.com/users');
+        const users = response.data;
+
+        const responsePosts = await axios.get('https://jsonplaceholder.typicode.com/posts?userId=' + userId);
+        const posts = responsePosts.data;
+
+        const responseAlbums = await axios.get('https://jsonplaceholder.typicode.com/albums?userId=' + userId);
+        const albums = responseAlbums.data;
+
+        if (splitRoute[1] !== '?' && getTitleDesc && userId) {
+            const getUser = users.find(user => parseInt(user.id) === parseInt(userId));
+            getTitleDesc.description = getTitleDesc.description + getUser?.name;
+            getTitleDesc.title = getUser?.username + ' ' + getTitleDesc.title;
+        }
+
+        users.sort(function (a, b) {
+            if (a.name < b.name) {
+                return -1;
+            }
+            if (a.name > b.name) {
+                return 1;
+            }
+            return 0;
+        })
 
         const appString = renderToString(
             <Provider store={store}>
                 <StaticRouter location={req.url} context={context}>
-                    <App users={[]} albums={[]} posts={[]}/>
+                    <App users={users} albums={albums} posts={posts}/>
                 </StaticRouter>
             </Provider>
         );
 
-        const html = template(appString, getTitleDesc, null);
+        const html = template(appString, getTitleDesc, customCss);
         res.send(html);
 
     } catch (error) {
